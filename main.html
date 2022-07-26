@@ -38,8 +38,8 @@
                                 <div class="d-flex p-3 border-bottom mb-2">
                                     <img src="./img/user.png" alt="user" class="img-user me-2">
                                     <div class="d-block">
-                                        <p class="fw-bold m-0 lh-1">Lourdes Alejandro</p>
-                                        <small>lalejandrog.599@gmail.com</small>
+                                        <p class="fw-bold m-0 lh-1" id="currentUser"></p>
+                                    
                                     </div>
                                 </div>
                                 <a class="dropdown-item" href="#">
@@ -50,7 +50,7 @@
                                 </a>
                                 <hr class="dropdown-divider">
                                 <a class="dropdown-item" href="#">
-                                    <i class="fa fa-sign-out fa-lg me-2" aria-hidden="true"></i>Cerrar sesión
+                                    <button class="btn btn-danger" id="btnLogout" >Cerrar sesion</button>
                                 </a>
                             </div>
                         </li>
@@ -135,11 +135,11 @@
                             <div class="head">
                                 <div>
                                     <h2>Registros</h2>
-                                    <p>amsdamsd</p>
+                            
                                 </div>
                                 <i class="bx bx-trending-up"></i>
                             </div>
-                            <span class="label">500</span>
+                            <span class="label" id="registroNo">500</span>
                         </div>
                     </div> 
                 </div>
@@ -149,22 +149,14 @@
                             <div class="head">
                                 <div>
                                     <h2>Tareas</h2>
-                                    <p>amsdamsd</p>
+                                 
                                 </div>
                                 <i class="bx bx-trending-up"></i>
                             </div>
-                            <span class="label">500</span>
+                            <span class="label" id="tareasNo">500</span>
                         </div>
                     </div> 
-
-
-
                 </div>
-
-
-
-
-
                 </div>
             </div>
         </div>
@@ -172,7 +164,47 @@
 
 
     </main>   
-    </div>         
+    </div>      
+    
+    <script>
+        var user = localStorage.getItem('username');
+        var user = JSON.parse(user);
+        document.getElementById('currentUser').innerHTML = user;
+
+        document.getElementById('btnLogout').addEventListener('click', function(){
+            localStorage.removeItem('username');
+            localStorage.removeItem('token');
+            window.location.href = 'index.html';
+        });
+
+        //Get registros length from api
+        fetch('http://localhost:3000/api/registros/complete',{
+                    headers:{
+                        'authorization':localStorage.getItem('token')
+                    }
+                })
+                .then(function(response){
+                    return response.json();
+                })
+                .then(function(data){
+                    document.getElementById('registroNo').innerHTML = data.length;
+                })
+        
+        //Get tareas length from api
+        fetch('http://localhost:3000/api/tareas/?username=true',{
+                    headers:{
+                        'authorization':localStorage.getItem('token')
+                    }
+                })
+                .then(function(response){
+                    return response.json();
+                })
+                .then(function(data){
+                    document.getElementById('tareasNo').innerHTML = data.length;
+                })
+
+
+    </script>
             
           
 

@@ -38,8 +38,7 @@
                                 <div class="d-flex p-3 border-bottom mb-2">
                                     <img src="./img/user.png" alt="user" class="img-user me-2">
                                     <div class="d-block">
-                                        <p class="fw-bold m-0 lh-1">Lourdes Alejandro</p>
-                                        <small>lalejandrog.599@gmail.com</small>
+                                        <p class="fw-bold m-0 lh-1" id="currentUser"></p>
                                     </div>
                                 </div>
                                 <a class="dropdown-item" href="#">
@@ -50,7 +49,7 @@
                                 </a>
                                 <hr class="dropdown-divider">
                                 <a class="dropdown-item" href="#">
-                                    <i class="fa fa-sign-out fa-lg me-2" aria-hidden="true"></i>Cerrar sesión
+									<button class="btn btn-danger" id="btnLogout" >Cerrar sesion</button>
                                 </a>
                             </div>
                         </li>
@@ -243,6 +242,15 @@
 			},
 			mounted(){
 				this.obtenerUsuarios();
+				var user = localStorage.getItem('username');
+        		var user = JSON.parse(user);
+        		document.getElementById('currentUser').innerHTML = user;
+
+				document.getElementById('btnLogout').addEventListener('click', function(){
+            	localStorage.removeItem('username');
+            	localStorage.removeItem('token');
+            	window.location.href = 'index.html';
+        	});
 			},
 			methods:{
 				obtenerUsuarios(){

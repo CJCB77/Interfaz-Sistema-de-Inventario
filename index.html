@@ -8,27 +8,34 @@
     <title>Login</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col col-md-offset-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="mt-5 text-center fs-2">Iniciar Sesion</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form action="" method="post">
-                            <div class="form-group mt-3">
-                                <label for="username" class="mb-2">Usuario:</label>
-                                <input type="text" class="form-control" name="username" id="username" placeholder="Username">
-                            </div>
-                            <div class="form-group mt-3">
-                                <label for="password" class="mb-2">Contraseña:</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" id="btnLogin" class="btn btn-lg btn-primary mt-3">Login</button>
-                            </div>
-                        </form>
+    <div id="app">
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-offset-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="mt-5 text-center fs-2">Iniciar Sesion</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="" method="post">
+                                <div class="form-group mt-3">
+                                    <label for="username" class="mb-2">Usuario:</label>
+                                    <input type="text" class="form-control" 
+                                        name="username" id="username" placeholder="Username" v-model="username">
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="password" class="mb-2">Contraseña:</label>
+                                    <input type="password" class="form-control" name="password" 
+                                        id="password" placeholder="Password" v-model="password">
+                                </div>                 
+                                <div class="form-group mt-3">
+                                   <p class="text-danger fs-6">{{ error }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" id="btnLogin" class="btn btn-lg btn-primary mt-3" @click="login">Login</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,48 +44,56 @@
     
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 <script>
-    //Get btnLogin in dom element
-    var btnLogin = document.getElementById('btnLogin');
-    //Add event listener to btnLogin
-    btnLogin.addEventListener('click', function(e){
-        //Prevent default action
-        e.preventDefault();
-        //Get username and password
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
 
-        // Fetch data from server at http://localhost:3000/api/auth/login
-        fetch('http://localhost:3000/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        })
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(data){
-            console.log(data);
-            console.log(data.token);
-            //Save token to local storage
-            localStorage.setItem('token', data.token);
-            //Redirect to home page
-            //Check if data is valid
-            if(data.loggedIn){
-                //Redirect to dashboard
-                window.location.href = 'main.html';
-            }else{
-                //Show error message
-                alert(data.message);
+    const app = new Vue({
+        el: '#app',
+        data: {
+            username: '',
+            password: '',
+            error: '',
+        },
+        
+        methods: {
+            login() {
+                console.log('login');
+                fetch('http://localhost:3000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                    username: this.username,
+                    password: this.password
+                    })
+                })
+                .then(response => response.json())
+                .then(function(data){
+                    console.log(data);
+                    console.log(data.token);
+                    //Save token to local storage
+                    localStorage.setItem('token', data.token);
+                    //Saves user to local storage
+                    localStorage.setItem('username', JSON.stringify(data.username));
+                    //Redirect to home page
+                    //Check if data is valid
+                    if(data.role == 1){
+                        //Redirect to dashboard
+                        window.location.href = 'main.html';
+                    }else{
+                        //Show error message
+                        if(data.role){
+                            app.error = 'Usuario no autorizado';
+                        }else{
+                            app.error = 'Usuario o contraseña incorrectos';
+                        }
+                    }
+                })
             }
-        })
-    });
 
+        }
+    });
 
 
 </script>
