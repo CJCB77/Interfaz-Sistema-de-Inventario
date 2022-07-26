@@ -139,12 +139,12 @@
 						<th style="width: 10%;"></th>
 					</thead>
 					<tbody>
-						<tr v-for="(vivienda, index) in listadoViviendas">
-							<td style="width: 20%;">{{vivienda.codigo}}</td>
-							<td style="width: 20%;">{{vivienda.lectura}}</td>
-							<td style="width: 20%;">{{vivienda.usuario}}</td>
-                            <td style="width: 20%;">{{vivienda.fecha}}</td>
-							<td style="width: 10%;"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarModal" @click="visualizarVivienda(index)">Visualizar</button></td>
+						<tr v-for="(registro, index) in listadoRegistros">
+							<td style="width: 20%;">{{registro.codigo}}</td>
+							<td style="width: 20%;">{{registro.lectura}}</td>
+							<td style="width: 20%;">{{registro.usuario}}</td>
+                            <td style="width: 20%;">{{registro.fecha}}</td>
+							<td style="width: 10%;"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarModal" @click="visualizarRegistros(index)">Visualizar</button></td>
 							<td style="width: 10%;"><button type="button" class="btn btn-danger" @click="borrarUsuario(index)">Borrar registro</button></td>
 						</tr>
 					</tbody>
@@ -178,6 +178,10 @@
                             <div class="col">
 								<h5>Foto:</h5>
 								<img :src="foto" style="height: 200px; width: 200px;">
+							</div>                            
+                            <div class="col">
+								<h5>Foto Procesada:</h5>
+								<img :src="procesada" style="height: 200px; width: 200px;">
 							</div>
                             <div class="col">
 								<h5>Coordenadas:</h5>
@@ -202,7 +206,7 @@
 	const app = new Vue({
 		el:'#app',
 		data:{
-			viviendas:[
+			registros:[
 			
 			],
             buscador:'',
@@ -215,7 +219,8 @@
             direccion:'',
             mz:'',
             villa:'',
-            foto:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Dark_chocolate_bar.jpg/245px-Dark_chocolate_bar.jpg',
+            foto:'',
+            procesada:'',
             coordenadas:'',
 		},
 		mounted(){
@@ -231,11 +236,11 @@
 			});
 		},
         computed:{
-            listadoViviendas(){
+            listadoRegistros(){
                 if(this.buscador=='')
-                    return this.viviendas
+                    return this.registros;
                 
-                return this.viviendas.filter(vivienda => vivienda.codigo.includes(this.buscador))
+                return this.registros.filter(registro => registro.codigo.includes(this.buscador))
             }
         },
 		methods:{
@@ -272,8 +277,11 @@
                             let mz = dato.mz;
                             //Get villa
                             let villa = dato.villa;
-                            //Push to viviendas
-                            this.viviendas.push({
+                            //Get procesada
+                            let imgProcesada = dato.imagen_procesada;
+                            console.log(dato.imagen_procesada);
+                            //Push to registros
+                            this.registros.push({
                                 id:dato.id,
                                 codigo:codigo,
                                 usuario:usuario,
@@ -283,6 +291,7 @@
                                 mz:mz,
                                 villa:villa,
                                 foto:imagen,
+                                procesada: imgProcesada,
                                 coordenadas:coordenadas
                             })
                         }
@@ -294,17 +303,18 @@
                 
 			},
 			
-			visualizarVivienda(index){
+			visualizarRegistros(index){
 				this.editar=true;
-				this.id= this.viviendas[index].id;
-				this.codigo= this.viviendas[index].codigo;
-				this.lectura= this.viviendas[index].lectura;
-                this.fecha= this.viviendas[index].fecha;
-                this.direccion= this.viviendas[index].direccion;
-                this.mz= this.viviendas[index].mz;
-                this.villa= this.viviendas[index].villa;
-                this.foto= this.viviendas[index].foto;
-                this.coordenadas= this.viviendas[index].coordenadas;
+				this.id= this.registros[index].id;
+				this.codigo= this.registros[index].codigo;
+				this.lectura= this.registros[index].lectura;
+                this.fecha= this.registros[index].fecha;
+                this.direccion= this.registros[index].direccion;
+                this.mz= this.registros[index].mz;
+                this.villa= this.registros[index].villa;
+                this.foto= this.registros[index].foto;
+                this.procesada= this.registros[index].procesada;
+                this.coordenadas= this.registros[index].coordenadas;
                 
 			},
 		}
