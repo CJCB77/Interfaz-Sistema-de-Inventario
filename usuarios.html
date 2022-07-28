@@ -260,7 +260,7 @@
 					//});
 					// Fetch http://localhost:3000/api/usuarios for users
 					//Add token to header from localStorage
-					fetch('http://localhost:3000/api/usuarios',{
+					fetch('https://lectura-medidor-api.herokuapp.com/api/usuarios',{
 						headers:{
 							'authorization':localStorage.getItem('token')
 						}
@@ -299,7 +299,7 @@
 					// console.log(index);
 					//Get user id and delete it from the database
 					let id = this.usuarios[index].id;
-					fetch('http://localhost:3000/api/usuarios/delete/'+id,{
+					fetch('https://lectura-medidor-api.herokuapp.com/api/usuarios/delete/'+id,{
 						method:'DELETE',
 						headers:{
 							'authorization':localStorage.getItem('token')
@@ -329,7 +329,7 @@
 					// 	this.limpiar();
 					// }
 					//Update the user in the database
-					fetch('http://localhost:3000/api/usuarios/update/'+ this.id,{
+					fetch('https://lectura-medidor-api.herokuapp.com/api/usuarios/update/'+ this.id,{
 						method:'PUT',
 						headers:{
 							'Content-Type':'application/json',
@@ -359,7 +359,7 @@
 					// 	this.limpiar();
 					// }
 					//Post http://localhost:3000/api/auth/register new user
-					fetch('http://localhost:3000/api/auth/register',{
+					fetch('https://lectura-medidor-api.herokuapp.com/api/auth/register',{
 						method:'POST',
 						headers:{
 							'Content-Type':'application/json',

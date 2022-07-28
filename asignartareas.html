@@ -226,7 +226,7 @@
 		methods:{
 			obtenerTareas(){
                //Fetch tareas at http://localhost:3000/api/tareas/
-                fetch('http://localhost:3000/api/tareas/?username=true',{
+                fetch('https://lectura-medidor-api.herokuapp.com/api/tareas/?username=true',{
                     headers:{
                         'authorization':localStorage.getItem('token')
                     }
@@ -261,7 +261,7 @@
                             descripcion: this.descripcion,
                         }
                         console.log(data)
-                        fetch('http://localhost:3000/api/tareas/add', {
+                        fetch('https://lectura-medidor-api.herokuapp.com/api/tareas/add', {
                             method: 'POST',
                             body: JSON.stringify(data),
                             headers: {

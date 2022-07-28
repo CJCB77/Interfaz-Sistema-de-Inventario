@@ -246,7 +246,7 @@
 		methods:{
 			obtenerRegistros(){
                 //Fetch registros at http://localhost:3000/api/registros/
-                fetch('http://localhost:3000/api/registros/complete',{
+                fetch('https://lectura-medidor-api.herokuapp.com/api/registros/complete',{
                     headers:{
                         'authorization':localStorage.getItem('token')
                     }
