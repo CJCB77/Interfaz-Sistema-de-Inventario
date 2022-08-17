@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venta Farmacia</title>
+    <!-- BOX ICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="./css/estilos.css">
+    <!-- CUSTOM JS -->
+    <script src="./js/app.js" defer></script>
+</head>
+<body style="background: #eee">
+    <div class="contenedor-division">
+        <div class="wrapper">
+            <nav class="navbar navbar-expand-md navbar-light bg-light py-1">
+                <div class="container-fluid" style="background: center;">
+                    <!-- <button class="btn btn-default" id="btn-slider" type="button">
+                        <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+                    </button> 
+                    < <a class="navbar-brand me-auto text-danger" href="#">Joh<span class="text-warning">Lou</span></a> -->
+                    
+                    <div>
+                        <!-- class="img-user" -->
+                        <img src="./img/jl3.png" alt=""  class="img-user img-fluid">
+                    </div>
+                    <ul class="nav ms-auto">
+                        
+                        <li class="nav-item dropstart">
+                            <a class="nav-link text-dark ps-3 pe-1" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown">
+                                <img src="./img/user.png" alt="user" class="img-user">
+                            </a>
+                            <div class="dropdown-menu mt-2 pt-0" aria-labelledby="navbarDropdown">
+                                <div class="d-flex p-3 border-bottom mb-2">
+                                    <img src="./img/user.png" alt="user" class="img-user me-2">
+                                    <div class="d-block">
+                                        <p class="fw-bold m-0 lh-1" id="currentUser"></p>
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-user fa-lg me-3" aria-hidden="true"></i>Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-cog fa-lg me-3" aria-hidden="true"></i>Ajustes
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="#">
+									<button class="btn btn-danger" id="btnLogout" >Cerrar sesion</button>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="menu-dashboard" >
+                <!-- TOP MENU -->
+                <div class="top-menu">
+                    <div class="logo">
+                        <span>Bienvenido Admin</span>
+                    </div>
+                    <div class="toggle">
+                        <i class='bx bx-menu'></i>
+                    </div>
+                </div>
+                
+                <!-- INPUT SEARCH -->
+                <div class="input-search">
+                    <i class='bx bx-search'></i>
+                    <input type="text" class="input" placeholder="Buscar">
+                </div>
+                <div class="menu">
+                    <div class="enlace">
+                        <i class="bx bx-plus-medical"></i>
+                        <!-- <span>Listar Regristros</span> -->
+                        <span><a href="inventario.html">Medicinas</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-add-to-queue"></i>
+                        <!-- <span>Asignar Tareas</span> -->
+                        <span><a href="agregarMedicina.html">Agregar medicina</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-copy-alt"></i>
+                        <!-- <span>Vivienda</span> -->
+                        <span><a href="ordenes.html">Ordenes</a></span>
+                    </div>                    <div class="enlace">
+                        <i class="bx bx-bar-chart"></i>
+                        <!-- <span>Vivienda</span> -->
+                        <span><a href="venta.html">Venta</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-user"></i>
+                        <!-- <span>Usuarios</span> -->
+                        <span><a href="clientes.html">Clientes</a></span>
+                    </div>
+                </div>   
+            </div>
+        </div>
+
+        <main class="espa">
+            <div>
+                <h1 class="tittle dash"> Dashboard </h1>
+            </div>
+			<div class="head-title dash">
+				<div class="left">
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Venta de medicina</a>
+						</li>
+					</ul>
+				</div>
+                
+			</div>
+        
+		<div id="app">
+			<div class="container-lg venta">
+				<div class="productos">
+					<div class="row">
+						<div class="col-7">
+							<h5 class="fs-5">Buscar medicina: </h5>
+							<input type="text" class="form-control" v-model="buscador">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col me-4 mt-4">
+							<table class="table table-striped" style="width:100%">
+								<thead>
+									<th style="width: 15%;">Nombre</th>
+									<th style="width: 10%;">Precio</th>
+									<th style="width: 10%;">Cantidad</th>
+									<th style="width: 20%;"></th>
+								</thead>
+								<tbody>
+									<tr v-for="(medicina, index) in listadoMedicinas">
+										<td style="width: 15%;">{{medicina.nombre}}</td>
+										<td style="width: 10%;">${{medicina.precio}}</td>
+										<td style="width: 10%;">
+											<input type="text" class="form-control">
+										</td>
+										<td style="width: 10%;"><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#editarModal" @click="visualizarMedicinas(index)">Detalles</button></td>
+										<td style="width: 10%;"><button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#editarModal" @click="visualizarMedicinas(index)">Agregar</button></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+				<div class="factura">
+					<h2 class="text-center fs-3">Venta</h2>
+				</div>
+	
+
+			</div>
+		</div>
+		</main>   
+    </div>         
+            
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	<script>
+		const app = new Vue({
+			el:'#app',
+			data:{
+				medicinas:[
+					
+					
+				],
+				buscador:'',
+				editar:false,
+				id:'',
+				nombre:'',
+				descripcion: '',
+				precio:'',
+				stock:'',
+				unidades_caja:'',
+				categoria:''
+			
+			},
+			mounted(){
+				this.obtenerMedicinas();
+			},
+			computed:{
+           	 	listadoMedicinas(){
+					if(this.buscador==''){
+						console.log(this.medicinas);
+						return this.medicinas;
+					}
+					else{
+						return this.medicinas.filter(medicina => medicina.nombre.includes(this.buscador))
+					}
+					
+            	}
+        	},
+			methods:{
+				obtenerMedicinas(){
+				//Obtener medicinas http://localhost:3000/api/medicinas
+					fetch('http://localhost:3000/api/medicinas')
+					.then(response => response.json())
+					.then(data => {
+						console.log(data);
+						this.medicinas = data;
+					})
+					.catch(error => console.log(error))
+					},
+				
+				}
+		})
+	</script>
+
+</body >
+</html>

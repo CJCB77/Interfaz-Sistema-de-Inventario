@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Johlou</title>
+    <title>Inventario</title>
     <!-- BOX ICONS -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -25,7 +25,7 @@
                     
                     <div>
                         <!-- class="img-user" -->
-                        <img src="./img/jl3.png" alt=""  class="img-user img-fluid">
+                        <img src="./img/logo-tacita-caliente.png" alt=""  class="navbar-brand" style="height: 110px;">
                     </div>
                     <ul class="nav ms-auto">
                         
@@ -72,35 +72,32 @@
                     <i class='bx bx-search'></i>
                     <input type="text" class="input" placeholder="Buscar">
                 </div>
-                <!-- MENU -->
                 <div class="menu">
                     <div class="enlace">
-                        <i class="bx bx-message-square"></i>
-                        <span><a href="main.html">Inicio</a></span>
-
+                        <i class="bx bx-plus-medical"></i>
+                        <!-- <span>Listar Regristros</span> -->
+                        <span><a href="inventario.html">Medicinas</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-add-to-queue"></i>
+                        <!-- <span>Asignar Tareas</span> -->
+                        <span><a href="agregarMedicina.html">Agregar medicina</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-copy-alt"></i>
+                        <!-- <span>Vivienda</span> -->
+                        <span><a href="ordenes.html">Ordenes</a></span>
+                    </div>                    <div class="enlace">
+                        <i class="bx bx-bar-chart"></i>
+                        <!-- <span>Vivienda</span> -->
+                        <span><a href="venta.html">Venta</a></span>
                     </div>
                     <div class="enlace">
                         <i class="bx bx-user"></i>
                         <!-- <span>Usuarios</span> -->
-                        <span><a href="#">Usuarios</a></span>
-                        
+                        <span><a href="clientes.html">Clientes</a></span>
                     </div>
-                    <div class="enlace">
-                        <i class="bx bx-grid-alt"></i>
-                        <!-- <span>Listar Regristros</span> -->
-                        <span><a href="listar.html">Listar Registros</a></span>
-                    </div>
-                    <div class="enlace">
-                        <i class="bx bx-grid-alt"></i>
-                        <!-- <span>Asignar Tareas</span> -->
-                        <span><a href="asignartareas.html">Asignar Tareas</a></span>
-                    </div>
-                    <div class="enlace">
-                        <i class="bx bx-grid-alt"></i>
-                        <!-- <span>Vivienda</span> -->
-                        <span><a href="vivienda.html">Vivenda</a></span>
-                    </div>
-                </div>    
+                </div>   
             </div>
         </div>
 
@@ -116,7 +113,7 @@
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="#">Usuarios</a>
+							<a class="active" href="#">Clientes</a>
 						</li>
 					</ul>
 				</div>
@@ -127,24 +124,25 @@
 			<div class="container">
 				<table class="table table-striped" style="width:100%">
 					<thead>
-						<th style="width: 20%;">Id</th>
-						<th style="width: 20%;">Usuario</th>
-						<th style="width: 20%;">Contraseña</th>
-						<th style="width: 20%;">Rol</th>
-						<th style="width: 10%;"></th>
-						<th style="width: 10%;"><btn class="btn btn-secondary"
+						<th style="width: 15%;">Cedula</th>
+						<th style="width: 20%;">Nombre</th>
+						<th style="width: 20%;">Direccion</th>
+						<th style="width: 10%;">Celular</th>
+						<th style="width: 15%;">Correo</th>
+						<th style="width: 20%;"><btn class="btn btn-secondary"
 							data-bs-toggle="modal" data-bs-target="#exampleModal">
-							Agregar usuario
+							Agregar
 						</btn></th>
 					</thead>
 					<tbody>
-						<tr v-for="(usuario, index) in usuarios">
-							<td style="width: 20%;">{{usuario.id}}</td>
-							<td style="width: 20%;">{{usuario.username}}</td>
-							<td style="width: 20%;">{{usuario.password}}</td>
-							<td style="width: 20%;">{{usuario.rol}}</td>
-							<td style="width: 10%;"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarModal" @click="editarUsuario(index)">Editar usuario</button></td>
-							<td style="width: 10%;"><button type="button" class="btn btn-danger" @click="borrarUsuario(index)">Borrar usuario</button></td>
+						<tr v-for="(cliente, index) in clientes">
+							<td style="width: 15%;">{{cliente.cedula}}</td>
+							<td style="width: 20%;">{{cliente.nombre}}</td>
+							<td style="width: 20%;">{{cliente.direccion}}</td>
+							<td style="width: 10%;">{{cliente.celular}}</td>
+							<td style="width: 10%;">{{cliente.correo}}</td>
+							<td style="width: 10%;"><button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#editarModal" @click="editarUsuario(index)">Actualizar</button></td>
+							<td style="width: 10%;"><button type="button" class="btn btn-outline-danger" @click="borrarUsuario(index)">Eliminar</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -161,20 +159,24 @@
 						<div class="modal-body">
 						  <div class="row">
 							<div class="col">
-								<h5>id:</h5>
-								<input type="text" v-model="id">
+								<h5>Cedula:</h5>
+								<input type="text" v-model="cedula">
 							</div>
 							<div class="col">
-								<h5>usuario:</h5>
-								<input type="text" v-model="username">
+								<h5>Nombre:</h5>
+								<input type="text" v-model="nombre">
 							</div>
 							<div class="col">
-								<h5>password:</h5>
-								<input type="text"v-model="password">
+								<h5>Direccion:</h5>
+								<input type="text"v-model="direccion">
 							</div>
 							<div class="col">
-								<h5>Rol:</h5>
-								<input type="text"v-model="rol">
+								<h5>Celular:</h5>
+								<input type="text"v-model="celular">
+							</div>		
+							<div class="col">
+								<h5>Correo:</h5>
+								<input type="text"v-model="correo">
 							</div>
 						  </div>
 						</div>
@@ -193,28 +195,32 @@
 						  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-						  <div class="row">
-							<div class="col">
-								<h5>id:</h5>
-								<input disabled type="text" v-model="id">
-							</div>
-							<div class="col">
-								<h5>usuario:</h5>
-								<input type="text" v-model="username">
-							</div>
-							<div class="col">
-								<h5>password:</h5>
-								<input type="text"v-model="password">
-							</div>
-							<div class="col">
-								<h5>Rol:</h5>
-								<input type="text"v-model="rol">
-							</div>
-						  </div>
+							<div class="row">
+								<div class="col">
+									<h5>Cedula:</h5>
+									<input type="text" v-model="cedula">
+								</div>
+								<div class="col">
+									<h5>Nombre:</h5>
+									<input type="text" v-model="nombre">
+								</div>
+								<div class="col">
+									<h5>Direccion:</h5>
+									<input type="text"v-model="direccion">
+								</div>
+								<div class="col">
+									<h5>Celular:</h5>
+									<input type="text"v-model="celular">
+								</div>		
+								<div class="col">
+									<h5>Correo:</h5>
+									<input type="text"v-model="correo">
+								</div>
+							  </div>
 						</div>
 						<div class="modal-footer">
 						  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="limpiar">Close</button>
-						  <button type="button" class="btn btn-primary" @click="actualizar">Save changes</button>
+						  <button type="button" class="btn btn-dark" @click="actualizar">Save changes</button>
 						</div>
 					  </div>
 					</div>
@@ -230,95 +236,52 @@
 		const app = new Vue({
 			el:'#app',
 			data:{
-				usuarios:[
+				clientes:[
 					
 				],
-
-				editar:false,
 				id:"",
-				username:'',
-				password:'',
-				rol:''
+				cedula:"",
+				nombre:'',
+				correo:'',
+				direccion:'',
+				celular:'',
 			},
 			mounted(){
-				this.obtenerUsuarios();
-				var user = localStorage.getItem('username');
-        		var user = JSON.parse(user);
-        		document.getElementById('currentUser').innerHTML = user;
-
-				document.getElementById('btnLogout').addEventListener('click', function(){
-            	localStorage.removeItem('username');
-            	localStorage.removeItem('token');
-            	window.location.href = 'index.html';
-        	});
+				this.obtenerClientes();
 			},
 			methods:{
-				obtenerUsuarios(){
+				obtenerClientes(){
 					//fetch('url').then(response=>{
 					//	for(dato in response.data)
 					//		this.usuarios.push({id:dato.id, username:dato.username, password:dato.password,})
 					//});
 					// Fetch http://localhost:3000/api/usuarios for users
 					//Add token to header from localStorage
-					fetch('https://lectura-medidor-api.herokuapp.com/api/usuarios',{
+					fetch('http://localhost:3000/api/clientes',{
 						headers:{
 							'authorization':localStorage.getItem('token')
 						}
 					})
 						.then(response => response.json())
 						.then(data => {
-							for(dato in data){
-								let username = data[dato].username;
-								let password = data[dato].password;
-								let rol = data[dato].role;
-
-								if(password.length >= 10){
-									//Substring first 10 chars
-									password = password.substring(0,10) + '...';
-								}
-								if(rol == 1){
-									rol = 'Admin';
-								}else{
-									rol = 'User';
-								}
-								
-								this.usuarios.push({
-									id:data[dato].id, 
-									username:username, 
-									password:password,
-									rol:rol
-								})
+							this.clientes = data;
 							}
 								
-						});
-		
-
+						);
 				},
 				borrarUsuario(index){
 					// this.usuarios.splice(index,1)
 					// console.log(index);
 					//Get user id and delete it from the database
 					let id = this.usuarios[index].id;
-					fetch('https://lectura-medidor-api.herokuapp.com/api/usuarios/delete/'+id,{
-						method:'DELETE',
-						headers:{
-							'authorization':localStorage.getItem('token')
-						}
-					}).then(response=>{
-						this.usuarios.splice(index,1);
-					});
-
+			
 				},
 				editarUsuario(index){
 					this.editar=true;
 					this.id= this.usuarios[index].id;
 					this.username= this.usuarios[index].username;
 					this.password= this.usuarios[index].password;
-					if(this.usuarios[index].rol == "Admin"){
-						this.rol = 1;
-					}else{
-						this.rol = 2;
-					}
+		
 				
 				},
 				actualizar(){

@@ -4,9 +4,13 @@
 
 :root {
     --blanco: #E0E0E0;
-    --azul-opacidad: #184463;
-    --bg-menu: #003053;
+    --azul-opacidad: #ffff;
+    --bg-menu: #2C3333;
     --bg-body: #C7E1FF;
+    --black: #2C3333;
+    --teal:#17BEBB;
+    --lila:#A2708A;
+    --copper:#D78521;
 }
 
 /* GENERALES */
@@ -277,4 +281,24 @@ body {
 .head-title .left .breadcrumb li a.active {
 	color: var(--blue);
 	pointer-events: unset;
+}
+
+.btn-black {
+    background: var(--black);
+    color: var(--blanco);
+    border-color: var(--black);
+}
+
+.venta {
+    display: flex;
+    padding: 15px 30px;
+}
+
+.productos {
+    width: 60%;
+    border-right: 1px solid #000;
+}
+
+.factura {
+    width: 40%;
 }

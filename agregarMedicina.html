@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Medicina</title>
+    <!-- BOX ICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="./css/estilos.css">
+    <!-- CUSTOM JS -->
+    <script src="./js/app.js" defer></script>
+</head>
+<body style="background: #eee">
+    <div class="contenedor-division">
+        <div class="wrapper">
+            <nav class="navbar navbar-expand-md navbar-light bg-light py-1">
+                <div class="container-fluid" style="background: center;">
+                  
+                    <img src="./img/logo-tacita-caliente.png" alt="" class="navbar-brand" style="height: 110px;">
+                   
+                    <ul class="nav ms-auto">
+                        
+                        <li class="nav-item dropstart">
+                            <a class="nav-link text-dark ps-3 pe-1" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown">
+                                <img src="./img/user.png" alt="user" class="img-user">
+                            </a>
+                            <div class="dropdown-menu mt-2 pt-0" aria-labelledby="navbarDropdown">
+                                <div class="d-flex p-3 border-bottom mb-2">
+                                    <img src="./img/user.png" alt="user" class="img-user me-2">
+                                    <div class="d-block">
+                                        <p class="fw-bold m-0 lh-1" id="currentUser"></p>
+                                    
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-user fa-lg me-3" aria-hidden="true"></i>Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-cog fa-lg me-3" aria-hidden="true"></i>Ajustes
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="#">
+                                    <button class="btn btn-danger" id="btnLogout" >Cerrar sesion</button>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="menu-dashboard" >
+                <!-- TOP MENU -->
+                <div class="top-menu">
+                    <div class="logo">
+                        <span>Bienvenido Admin</span>
+                    </div>
+                    <div class="toggle">
+                        <i class='bx bx-menu'></i>
+                    </div>
+                </div>
+                
+                <!-- INPUT SEARCH -->
+                <div class="input-search">
+                    <i class='bx bx-search'></i>
+                    <input type="text" class="input" placeholder="Buscar">
+                </div>
+                <!-- MENU -->
+                <div class="menu">
+                    <div class="enlace">
+                        <i class="bx bx-plus-medical"></i>
+                        <!-- <span>Listar Regristros</span> -->
+                        <span><a href="inventario.html">Medicinas</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-add-to-queue"></i>
+                        <!-- <span>Asignar Tareas</span> -->
+                        <span><a href="agregarMedicina.html">Agregar medicina</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-copy-alt"></i>
+                        <!-- <span>Vivienda</span> -->
+                        <span><a href="ordenes.html">Ordenes</a></span>
+                    </div>                    <div class="enlace">
+                        <i class="bx bx-bar-chart"></i>
+                        <!-- <span>Vivienda</span> -->
+                        <span><a href="venta.html">Venta</a></span>
+                    </div>
+                    <div class="enlace">
+                        <i class="bx bx-user"></i>
+                        <!-- <span>Usuarios</span> -->
+                        <span><a href="clientes.html">Clientes</a></span>
+                    </div>
+                </div>  
+            </div>
+        </div>
+
+        <main class="espa">
+            <div>
+                <h1 class="tittle dash"> Dashboard </h1>
+            </div>
+            <div class="head-title dash">
+				<div class="left">
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Agregar medicamento</a>
+						</li>
+					</ul>
+				</div>
+                
+			</div>
+        
+		<div id="app">
+			<div class="container">
+                <div class="form ms-3">
+                    <h3 class="mb-4 fw-bold fs-4">Agregar nuevo medicamento</h3>
+                    <div class="mb-3 row">
+                        <div class="col-12">
+                            <label for="nombre" class="mb-1">Nombre del medicamento:</label>
+                            <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Ej. Paracetamol 500mg" v-model="nombre">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-6">
+                            <label for="categoria" class="mb-1">Categoria:</label>
+                            <select class="form-control" id="categoria" v-model="categoria">
+                                <option v-for="(categoria,index) in categorias ">
+                                    {{categoria.nombre}}
+                                </option>
+   
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for="precio" class="mb-1">Precio:</label>
+                            <input class="form-control" type="text" name="precio" id="precio" placeholder="Ej. 0.20" v-model="precio">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="stock" class="mb-1">Cantidad en stock:</label>
+                            <input class="form-control" type="text" name="stock" id="stock" placeholder="Ej. 80" v-model="stock">
+                        </div>                        
+                        <div class="col-6">
+                            <label for="caja" class="mb-1">Unidades por caja:</label>
+                            <input class="form-control" type="text" name="caja" id="caja" placeholder="Ej. 12" v-model="unidades_caja">
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="nombre" class="mb-1">Descripción:</label>
+                            <textarea class="form-control" name="descripcion" id="descripcion" cols="30" rows="5" placeholder="Ej. Descripcion del medicamento" v-model="descripcion"></textarea>
+                        </div>
+                    </div>
+                    <div class="row ms-1 me-1">
+                        <button class="btn btn-dark mt-4" @click="agregarMedicina">Guardar</button>
+                    </div>
+                </div>
+			</div>
+		</div>
+        </main> 
+    </div> 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+	const app = new Vue({
+		el:'#app',
+		data:{
+			categorias:[
+
+			],
+            nombre:'',
+            descripcion: '',
+            precio:'',
+            stock:'',
+            categoria:'',
+            unidades_caja:'',
+
+		},
+		mounted(){
+            this.cargarCategorias();
+		},
+        computed:{
+            listadotareas(){
+                if(this.buscador=='')
+                    return this.asignarTareas
+                
+                return this.asignarTareas.filter(tarea => tarea.usuario.includes(this.buscador))
+            }
+        },
+		methods:{
+            async agregarMedicina(){
+						// if(this.usuario != "" && this.descripcion !="" && this.descripcion!=""){
+						// 	this.asignarTareas.push({usuapreciouario, titulo:this.titulo, descripcion:this.descripcion})
+						// 	this.limpiar();
+						// }
+                        //Post tarea at http://localhost:3000/api/tareas/add
+                        let data = {
+                            nombre: this.nombre,
+                            descripcion: this.descripcion,
+                            precio: Number(this.precio),
+                            stock: Number(this.stock),
+                            categoria: this.categoria,
+                            unidades_caja: Number(this.unidades_caja)
+                        }
+
+                        await fetch('https://api-farmacia-fundacion.herokuapp.com/api/categorias/' + this.categoria)
+                            .then(res => res.json())
+                            .then(categoria => {
+                                data.categoria_id = categoria.id;
+                            })         
+                        
+                        //Add medicine through POST request
+                        fetch("https://api-farmacia-fundacion.herokuapp.com/api/medicinas/add",{
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(res => res.json())
+                        .then( data => {
+                            this.limpiar();
+                        })    
+               
+			},
+            cargarCategorias(){
+                fetch('https://api-farmacia-fundacion.herokuapp.com/api/categorias/')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    this.categorias = data;
+                })
+            },
+            limpiar(){
+                this.nombre="";
+                this.descripcion="";
+                this.precio="";
+                this.stock="";
+                this.categoria="";
+                this.unidades_caja="";
+            }      
+		},
+	})
+</script>
+</body >
+</html>                               
